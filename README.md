@@ -10,6 +10,10 @@ You can find all informations on the `develop's branch`.
 
 We have define all the structure inside one repository with logical subdirs.
 
+- **documentation**
+- **back-end**
+- **front-end**
+
 ## Git Branch guideline
 
 Follow [Git flow](http://nvie.com/posts/a-successful-git-branching-model/) approach.
