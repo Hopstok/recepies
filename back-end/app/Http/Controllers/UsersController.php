@@ -34,12 +34,15 @@ class UsersController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        //create Rules @TODO manca anche la transaction per l'invio della email per presa visione della registrazione
+        //create Rules @TODO manca la transaction
         $params             = $request->input();
         $password           = password_hash($params['password'], PASSWORD_BCRYPT);
         $params['password'] = $password;
         $us = $this->user->create($params);
+        // @TODO manca l'invio delle email
+
         return response()->json(['code' => 200, 'status' => 'success', 'data' => $us], 200);
+
     }
 
     /**
@@ -69,7 +72,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, int $id): JsonResponse
     {
-        //update Rules @TODO manca anche la transaction per l'invio della email per presa visione della registrazione
+        //update Rules @TODO manca anche la transaction
         $params = $request->input();
 
         if (isset($params['password'])) {
@@ -81,6 +84,7 @@ class UsersController extends Controller
             ->update($params);
 
         if ($us === 1) {
+            // @TODO manca l'invio delle email
             return response()->json(['code' => 200, 'status' => 'success'], 200);
         } else {
             return response()->json(['code' => 404, 'status' => 'unsuccess', 'message' => 'User not found']);
@@ -97,8 +101,7 @@ class UsersController extends Controller
     {
         // @TODO mancano le validation
         // @TODO manca l'autentiacation.
-        // utilizzo la funzione password_veryfy(<password scritta nella post>, <hash trovato dopo la quesry>
-        // le confronto se torna true il metodo il login viene accordato.
+
         $params     = $request->input();
         $email      = $params['email'];
         $password   = $params['password'];
@@ -128,10 +131,13 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function recover(Request $request): JsonResponse
     {
         // @TODO mancano le validation
-        // @TODO manca l'invio delle email
         $params         = $request->input();
         $email          = $params['email'];
         $newPassword    = $params['password'];
@@ -145,14 +151,14 @@ class UsersController extends Controller
             return response()->json(['code' => 404, 'status' => 'unsuccess','message' => "User not found"]);
 
         } else {
-            //aggiorno la password e invio la email.
+            // @TODO aggiorno la password e invio la email.
             $id             = $us['id'];
             $newPassword    = password_hash($newPassword, PASSWORD_BCRYPT);
             $us             = $this->user->where('id', '=', $id)
                                 ->update(array('password' => $newPassword));
 
             if ($us === 1) {
-                // invio della email con password
+                // @TODO invio della email con password
                 return response()->json(['code' => 200, 'status' => 'success'], 200);
             } else {
                 return response()->json(['code' => 404, 'status' => 'unsuccess', 'message' => 'User not found']);
