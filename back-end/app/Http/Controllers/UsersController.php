@@ -196,7 +196,7 @@ class UsersController extends Controller
         }
     }
 
-    public function resetpassword(Request $request): JsonResponse
+    public function passwordreset(Request $request): JsonResponse
     {
         $params         = $request->input();
         $email          = $params['email'];
