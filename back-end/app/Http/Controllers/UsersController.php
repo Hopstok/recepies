@@ -158,7 +158,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Metodo che esegue l'update della password di un utente.
+     * Metodo che consente di modificare la password dopo aver richiesto il recover
      * @param Request $request
      * @return JsonResponse
      */
@@ -196,6 +196,10 @@ class UsersController extends Controller
         }
     }
 
+    /** Metodo che consente di richiedere il recover della password
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function passwordreset(Request $request): JsonResponse
     {
         $params         = $request->input();
