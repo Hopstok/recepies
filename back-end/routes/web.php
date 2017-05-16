@@ -11,10 +11,12 @@
 |
 */
 
-Route::post('users/login',      'UsersController@login');
-Route::post('users/recover',    'UsersController@recover');
+Route::post('users/login',              'UsersController@login');
+Route::post('users/passwordrecover',    'UsersController@passwordrecover');
+Route::post('users/passwordreset',      'UsersController@passwordreset');
 Route::resource('users',        'UsersController',          ['only' => ['index','store','show','update']]);
 Route::resource('recipes',      'RecipesController',        ['only' => ['index','store','show','update']]);
 Route::resource('ingredients',  'IngredientsController',    ['only' => ['index','show']]);
+
 
 
