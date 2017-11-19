@@ -1,0 +1,56 @@
+################################################################################
+#  Project: REST Rock Recepies API
+#  Copyright (c) HOPSTOK S.r.l.
+# 
+# 
+################################################################################
+swagger: '2.0'
+################################################################################
+#                              API Information                                 #
+################################################################################
+info:
+  version: v1
+  title: REST Rock Recepies API
+
+host: rock-recipes.com
+basePath: /v1
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+consumes:
+  - application/json
+
+###############################################################################
+# Definitions Model
+###############################################################################
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      surname:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      recoveryPasswordToken:
+        type: string
+      isAdmin:
+        type: boolean
+    required:
+      - id
+      - name
+      - surname
+      - email
+      - isAdmin
+
+###############################################################################
+# Routes
+###############################################################################
+paths:
