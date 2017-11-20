@@ -1952,7 +1952,7 @@
 									"height": 13,
 									"autoResize": false,
 									"underline": false,
-									"text": "steps_images",
+									"text": "step_images",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -3110,7 +3110,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFbFCUkLi5yX9w="
 					},
-					"name": "steps_images",
+					"name": "step_images",
 					"columns": [
 						{
 							"_type": "ERDColumn",
