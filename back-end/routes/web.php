@@ -19,4 +19,3 @@ Route::resource('recipes',      'RecipesController',        ['only' => ['index',
 Route::resource('ingredients',  'IngredientsController',    ['only' => ['index','show']]);
 
 
-

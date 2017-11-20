@@ -54,7 +54,7 @@ class UsersController extends Controller
         try {
             $us = $this->user->create($params);
             $this->email->to($params['email'])->send(new Welcome($us));
-        }catch(Exception $e) {
+        } catch(Exception $e) {
             return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
         }
         return response()->json(['code' => 200, 'status' => 'success', 'data' => $us], 200);
@@ -73,7 +73,7 @@ class UsersController extends Controller
             $us = $this->user->select('name', 'surname', 'username', 'email')
                 ->where('id', '=', $id)
                 ->first();
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
         }
 
@@ -124,7 +124,6 @@ class UsersController extends Controller
     {
         // @TODO mancano le validation
         // @TODO manca l'autentiacation.
-
         $params     = $request->input();
         $email      = $params['email'];
         $password   = $params['password'];
@@ -134,7 +133,7 @@ class UsersController extends Controller
             $us = $this->user->select('password')
                 ->where('email', '=', $email)
                 ->first();
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
         }
 
