@@ -1,4 +1,5 @@
 {
+  "extends": [ "tslint:recommended" ],
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -25,8 +26,10 @@
       true,
       "spaces"
     ],
+    "interface-name": [true, "never-prefix"],
     "interface-over-type-literal": true,
     "label-position": true,
+    "linebreak-style": [true, "LF"],
     "max-line-length": [
       true,
       140
@@ -65,7 +68,6 @@
     ],
     "no-misused-new": true,
     "no-non-null-assertion": true,
-    "no-redundant-jsdoc": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
