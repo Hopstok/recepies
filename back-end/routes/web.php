@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
 |--------------------------------------------------------------------------
@@ -11,11 +11,14 @@
 |
 */
 
-Route::post('users/login',              'UsersController@login');
-Route::post('users/passwordrecover',    'UsersController@passwordrecover');
-Route::post('users/passwordreset',      'UsersController@passwordreset');
-Route::resource('users',        'UsersController',          ['only' => ['index','store','show','update']]);
-Route::resource('recipes',      'RecipesController',        ['only' => ['index','store','show','update']]);
-Route::resource('ingredients',  'IngredientsController',    ['only' => ['index','show']]);
+// version of the api.
+Route::prefix('api/v1')->group(function () {
 
-
+    // user endpoint
+    Route::resource('users',        'UsersController',          ['only' => ['index','create','show','update']]);
+    // recipe endpoint
+    Route::resource('recipes',      'RecipesController',        ['only' => ['index','create','show','update']]);
+    // ingredients endpoint
+    Route::get('/ingredients', 'IngredientsController@index');
+    Route::get('/ingredients/{id}', 'IngredientsController@show');
+});

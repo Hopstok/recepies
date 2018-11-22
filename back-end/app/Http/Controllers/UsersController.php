@@ -1,52 +1,44 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Mail\Recover;
 use App\Mail\Welcome;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
 use Exception;
 
-
-
+/**
+ * Class UsersController
+ */
 class UsersController extends Controller
 {
-
-    private $user;
-    private $email;
-
-    public function __construct(User $user, Mailer $email)
-    {
-        $this->user     = $user;
-        $this->email    = $email;
-    }
-
     /**
      * Display a listing of the resource.
+     *
      * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         try {
-            $us = $us = $this->user->all();
+            $user = new User();
+            $list = $user->getAll();
         } catch (Exception $e) {
             return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
         }
-        return response()->json(['code' => 200, 'status' => 'success', 'data' => $us], 200);
+        return response()->json(['code' => 200, 'status' => 'success', 'data' => $list], 200);
     }
-
 
     /**
      * Store a newly created resource in storage.
+     *
      * @param Request $request
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse
     {
-
         $params             = $request->input();
         $password           = password_hash($params['password'], PASSWORD_BCRYPT);
         $params['password'] = $password;
@@ -64,6 +56,7 @@ class UsersController extends Controller
 
     /**
      * Display the specified resource.
+     *
      * @param int $id
      * @return JsonResponse
      */
@@ -84,9 +77,9 @@ class UsersController extends Controller
         }
     }
 
-
     /**
      * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param int $id
      * @return JsonResponse
@@ -116,7 +109,8 @@ class UsersController extends Controller
     }
 
     /**
-     * Fucntion that implement the login of a new user
+     * Fucntion that implement the login of a new user.
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -157,11 +151,12 @@ class UsersController extends Controller
     }
 
     /**
-     * Metodo che consente di modificare la password dopo aver richiesto il recover
+     * Metodo che consente di modificare la password dopo aver richiesto il recover.
+     *
      * @param Request $request
      * @return JsonResponse
      */
-    public function passwordrecover(Request $request): JsonResponse
+    public function recover(Request $request): JsonResponse
     {
         // @TODO mancano le validation
         $params         = $request->input();
@@ -195,7 +190,8 @@ class UsersController extends Controller
         }
     }
 
-    /** Metodo che consente di richiedere il recover della password
+    /** Metodo che consente di richiedere il recover della password.
+     *
      * @param Request $request
      * @return JsonResponse
      */

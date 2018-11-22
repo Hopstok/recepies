@@ -1,10 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class User
+ */
 class User extends Model
 {
     /**
@@ -13,12 +16,16 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'surname','username','email', 'password',
+        'name',
+        'surname',
+        'username',
+        'email',
+        'password',
     ];
 
     public function recipes(): HasMany
     {
-        return $this->hasMany('App/Recipe');
+        return $this->hasMany('App/Model/Recipe');
     }
 
 }

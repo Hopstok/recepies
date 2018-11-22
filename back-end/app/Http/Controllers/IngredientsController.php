@@ -1,30 +1,37 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredient;
+use Illuminate\Http\JsonResponse;
+
+/**
+ * Class IngredientsController.
+ */
 class IngredientsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all ingredients.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        return response()->json(['code' =>"Tutti gli ingredienti"],200);
+        $ingredients = new Ingredient();
 
+        return response()->json(['data' => $ingredients->getIngedients()],200);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
-        return response()->json(['code'=>"Restituzione ingrediente"],200);
+        $ingredients = new Ingredient();
 
+        return response()->json(['data'=> $ingredients->getIngedients($id)],200);
     }
-
 }
