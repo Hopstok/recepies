@@ -1,4 +1,20 @@
+# OS and Ide
 .DS_Store
-.idea/
-.vscode/
-.env
+.Thumbs.db
+.project
+.settings
+.buildpath
+.pydevproject
+.idea
+
+# Laravel
+_ide_helper.php
+.phpstorm.meta.php
+#/vendor
+/node_modules
+.env*
+
+# Languages
+*.pyc
+*.pyo
+.php_cs.cache
