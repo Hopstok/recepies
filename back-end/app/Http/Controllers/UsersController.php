@@ -156,7 +156,7 @@ class UsersController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function recover(Request $request): JsonResponse
+    public function passwordrecover(Request $request): JsonResponse
     {
         // @TODO mancano le validation
         $params         = $request->input();
@@ -168,7 +168,7 @@ class UsersController extends Controller
                 ->where('email', '=', $email)
                 ->first();
         } catch (Exception $e) {
-            return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
+            return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()], 400);
         }
 
         if (is_null($user)) {
@@ -207,7 +207,7 @@ class UsersController extends Controller
                 ->first();
             $this->email->to($params['email'])->send(new Recover($user));
         }catch (Exception $e) {
-            return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
+            return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()], 400);
         }
         return response()->json(['code' => 200, 'status' => 'success'], 200);
     }

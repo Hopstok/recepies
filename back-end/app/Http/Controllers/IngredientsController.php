@@ -19,7 +19,7 @@ class IngredientsController extends Controller
     {
         $ingredients = new Ingredient();
 
-        return response()->json(['data' => $ingredients->getIngedients()],200);
+        return response()->json(['data' => $ingredients->getIngedients()], 200);
     }
 
     /**
@@ -32,6 +32,6 @@ class IngredientsController extends Controller
     {
         $ingredients = new Ingredient();
 
-        return response()->json(['data'=> $ingredients->getIngedients($id)],200);
+        return response()->json(['data'=> $ingredients->getIngedients($id)], 200);
     }
 }

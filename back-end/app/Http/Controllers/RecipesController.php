@@ -16,7 +16,7 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        return response()->json(['code' =>"Tutte le ricette"],200);
+        return response()->json(['code' =>"Tutte le ricette"], 200);
     }
 
 
@@ -28,7 +28,7 @@ class RecipesController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json(['code'=>"creazione Ricetta"],200);
+        return response()->json(['code'=>"creazione Ricetta"], 200);
     }
 
     /**
@@ -39,7 +39,7 @@ class RecipesController extends Controller
      */
     public function show($id)
     {
-        return response()->json(['code'=>"Restituzione Ricetta"],200);
+        return response()->json(['code'=>"Restituzione Ricetta"], 200);
     }
 
     /**
@@ -51,7 +51,7 @@ class RecipesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json(['code'=>"Update Ricetta"],200);
+        return response()->json(['code'=>"Update Ricetta"], 200);
     }
 
 }
