@@ -1,0 +1,8 @@
+<form
+  clrForm
+  [formGroup]="formGroup"
+  [clrLayout]="layout">
+  <ng-content select="[prepend]"></ng-content>
+  <ng-content></ng-content>
+  <ng-content select="[append]"></ng-content>
+</form>

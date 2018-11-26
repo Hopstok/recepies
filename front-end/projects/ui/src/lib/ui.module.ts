@@ -3,10 +3,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule, ClrFormsModule } from '@clr/angular';
 
+import { FormComponent } from './form/form.component';
 import { InputComponent } from './input/input.component';
 import { UiComponent } from './ui.component';
 
 const COMPONENTS = [
+  FormComponent,
   InputComponent,
 ];
 
