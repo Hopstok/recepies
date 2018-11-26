@@ -28,7 +28,9 @@
     ],
     "paths": {
       "@src/*": ["./src/*"],
-      "@rock-recipe/*": ["./src/app/*"]
+      "@rock-recipe/*": ["./src/app/*"],
+      "@ui": ["dist/ui"],
+      "@ui/*": ["dist/ui/*"]
     }
   }
 }
