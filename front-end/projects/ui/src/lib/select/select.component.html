@@ -1,0 +1,13 @@
+<clr-select-container>
+  <label *ngIf="label">{{ label }}</label>
+  <select
+    clrSelect
+    name="options"
+    [formControl]="formControl">
+    <option
+      *ngFor="let option of options"
+      [value]="option">
+      {{ option }}
+    </option>
+  </select>
+</clr-select-container>

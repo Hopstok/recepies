@@ -5,11 +5,13 @@ import { ClarityModule, ClrFormsModule } from '@clr/angular';
 
 import { FormComponent } from './form/form.component';
 import { InputComponent } from './input/input.component';
+import { SelectComponent } from './select/select.component';
 import { UiComponent } from './ui.component';
 
 const COMPONENTS = [
   FormComponent,
   InputComponent,
+  SelectComponent,
 ];
 
 @NgModule({
