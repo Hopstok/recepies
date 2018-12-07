@@ -5,9 +5,14 @@
     name="options"
     [formControl]="formControl">
     <option
+      *ngIf="allowEmptyOption"
+      [value]="undefined">
+      {{ placeholder }}
+    </option>
+    <option
       *ngFor="let option of options"
-      [value]="option">
-      {{ option }}
+      [value]="option.value">
+      {{ option.label }}
     </option>
   </select>
 </clr-select-container>
