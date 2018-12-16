@@ -16,7 +16,7 @@ class IngredientsController extends Controller
     public function index(): JsonResponse
     {
         $data = Ingredient::getAllIngredient();
-        return response()->json(['data' => $data ],self::OK);
+        return response()->json(['data' => $data ], self::OK);
 
     }
 
@@ -29,7 +29,7 @@ class IngredientsController extends Controller
     public function show($id): JsonResponse
     {
         $data = Ingredient::getSpecifiedIngredients($id);
-        return response()->json(['data' => $data ],self::OK);
+        return response()->json(['data' => $data ], self::OK);
 
     }
 
@@ -44,7 +44,7 @@ class IngredientsController extends Controller
     {
         $name = $request->input('name');
         $newIngredient = Ingredient::createIngredients($name);
-        return response()->json(['data' => $newIngredient],self::OK);
+        return response()->json(['data' => $newIngredient], self::OK);
 
     }
 
