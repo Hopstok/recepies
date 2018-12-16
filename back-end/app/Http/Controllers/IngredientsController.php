@@ -16,7 +16,7 @@ class IngredientsController extends Controller
     public function index(): JsonResponse
     {
         $data = Ingredient::getAllIngredient();
-        return response()->json(['data' => $data ], self::OK);
+        return response()->json(['data' => $data], self::OK);
 
     }
 
@@ -29,7 +29,7 @@ class IngredientsController extends Controller
     public function show($id): JsonResponse
     {
         $data = Ingredient::getSpecifiedIngredients($id);
-        return response()->json(['data' => $data ], self::OK);
+        return response()->json(['data' => $data], self::OK);
 
     }
 
@@ -59,10 +59,12 @@ class IngredientsController extends Controller
     {
         $deleteIngredient = Ingredient::deleteIngredient($id);
         if ($deleteIngredient === true) {
-            return response()->json(['data' => $deleteIngredient], self::OK);
+            $response = response()->json(['data' => $deleteIngredient], self::OK);
         } else {
-            return response()->json(['message' => 'Resource not found' ], self::NOT_FOUND);
+            $response = response()->json(['message' => 'Resource not found' ], self::NOT_FOUND);
         }
+
+        return $response;
     }
 
 }
