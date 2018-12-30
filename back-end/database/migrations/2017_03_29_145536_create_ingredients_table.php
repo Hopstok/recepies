@@ -22,7 +22,7 @@ class CreateIngredientsTable extends Migration
             $table->charset = 'utf8';
             $table->collation   = 'utf8_general_ci';
             $table->increments('id');
-            $table->string('name',40);
+            $table->string('name',40)->unique();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
