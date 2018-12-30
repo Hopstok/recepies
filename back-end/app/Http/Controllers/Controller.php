@@ -24,4 +24,11 @@ class Controller extends BaseController
      * @var int
      */
     const NOT_FOUND = 404;
+
+    /**
+     * Represent 400 status.
+     *
+     * @var int
+     */
+    const NOT_CREATED = 400;
 }
