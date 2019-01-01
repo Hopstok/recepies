@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class IngredientsController extends Controller
 {
+    /** @var IngredientImpl $ingredientImp */
     private $ingredientImp;
 
     public function __construct(IngredientImpl $ingredientImp)
@@ -16,30 +17,28 @@ class IngredientsController extends Controller
     }
 
     /**
-     * Get all ingredients from DB.
+     * Get all Ingredients from DB.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         $data = $this->ingredientImp->getAll();
 
         return response()->json(['data' => $data], self::OK);
-
     }
 
     /**
-     * Get the specified ingredients from DB.
+     * Get the specified Ingredients from DB.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show($id): JsonResponse
     {
         $data = $this->ingredientImp->getById($id);
 
         return response()->json(['data' => $data], self::OK);
-
     }
 
     /**

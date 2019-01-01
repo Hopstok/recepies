@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Ingredient extends Model
 {
+    /** @var string $table */
+    protected $table = 'recipes_ingredients';
+
     /** @var array $fillable */
     protected $fillable = ['name'];
 
@@ -15,6 +18,6 @@ class Ingredient extends Model
 
     public function recipes(): BelongsToMany
     {
-        return $this->belongsToMany('App/Model/Recipe','recipes_ingredients','ingredient_id','recipe_id');
+        return $this->belongsToMany('App/Model/Recipe', $this->getTable(),'ingredient_id','recipe_id');
     }
 }
