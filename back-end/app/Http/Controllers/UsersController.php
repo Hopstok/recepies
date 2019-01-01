@@ -1,27 +1,29 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Users;
 use App\Mail\Recover;
 use App\Mail\Welcome;
-use App\User;
+use App\Repositories\Implementations\UserImpl;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
 use Exception;
 
-
-
 class UsersController extends Controller
 {
 
+    private $userImp;
     private $user;
     private $email;
 
-    public function __construct(User $user, Mailer $email)
+    public function __construct(User $user, Mailer $email, UserImpl $userImp)
     {
-        $this->user     = $user;
-        $this->email    = $email;
+        $this->user = $user;
+        $this->email = $email;
+        $this->userImp = $userImp;
     }
 
     /**
@@ -30,63 +32,68 @@ class UsersController extends Controller
      */
     public function index(): JsonResponse
     {
-        try {
-            $us = $us = $this->user->all();
-        } catch (Exception $e) {
-            return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
-        }
-        return response()->json(['code' => 200, 'status' => 'success', 'data' => $us], 200);
-    }
+        $data = $this->userImp->getAll();
 
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function store(Request $request): JsonResponse
-    {
-
-        $params             = $request->input();
-        $password           = password_hash($params['password'], PASSWORD_BCRYPT);
-        $params['password'] = $password;
-
-        try {
-            $us = $this->user->create($params);
-            $this->email->to($params['email'])->send(new Welcome($us));
-        } catch(Exception $e) {
-            return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
-        }
-        return response()->json(['code' => 200, 'status' => 'success', 'data' => $us], 200);
-
-
+        return response()->json(['data' => $data], self::OK);
     }
 
     /**
      * Display the specified resource.
+     *
      * @param int $id
      * @return JsonResponse
      */
     public function show(int $id): JsonResponse
     {
-        try {
-            $us = $this->user->select('name', 'surname', 'username', 'email')
-                ->where('id', '=', $id)
-                ->first();
-        } catch (Exception $e) {
-            return response()->json(['code' => 400, 'status' => 'unsuccess','exception' => $e->getMessage()],400);
-        }
+        $data = $this->userImp->getById($id);
 
-        if (is_null($us)) {
-            return response()->json(['code' => 404, 'status' => 'unsuccess']);
-        } else {
-            return response()->json(['code' => 200, 'status' => 'success', 'data' => $us], 200);
-        }
+        return response()->json(['data' => $data], self::OK);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Users $request
+     * @return JsonResponse
+     */
+    public function create(Users $request): JsonResponse
+    {
+        $params             = $request->input();
+        $password           = password_hash($params['password'], PASSWORD_BCRYPT);
+        $params['password'] = $password;
+        $us = $this->userImp->create($params);
+        if (!empty($us)) {
+            $res =  response()->json(['data' => $us], self::OK);
+            $this->email->to($params['email'])->send(new Welcome($us));
+        } else {
+            $res = response()->json(['data' => $us], self::NOT_CREATED);
+        }
+
+        return $res;
+    }
+
+    /**
+     * Method to delete a Recipe.
+     *
+     * @param $id
+     *
+     * @return JsonResponse
+     */
+    public function delete($id)
+    {
+        $data = $this->userImp->delete($id);
+        if ($data === true) {
+            $response = response()->json(['data' => $data], self::OK);
+        } else {
+            $response = response()->json(['message' => 'Resource not found' ], self::NOT_FOUND);
+        }
+
+        return $response;
+    }
 
     /**
      * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param int $id
      * @return JsonResponse
@@ -216,4 +223,3 @@ class UsersController extends Controller
         return response()->json(['code' => 200, 'status' => 'success'], 200);
     }
 }
-
