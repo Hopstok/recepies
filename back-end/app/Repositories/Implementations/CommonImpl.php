@@ -39,7 +39,8 @@ class CommonImpl implements Common
         $record = [];
         $model = $this->model->find($id);
         if ($model !== null) {
-            $record = $model['original'];
+            $record = $model->getAttributes();
+            unset($record['created_at'], $record['updated_at']);
         }
 
         return $record;
@@ -71,9 +72,9 @@ class CommonImpl implements Common
      *
      * @return Model
      */
-    public function update ($id, array $attributes): Model
+    public function update ($id, array $attributes): bool
     {
-        return $this->model->where('id', $id)
+        return (bool) $this->model->where('id', $id)
             ->update($attributes);
     }
 
