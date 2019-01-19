@@ -2,7 +2,7 @@
   "name": "front-end",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "npm run regen-rest",
+    "postinstall": "npm run regen-rest && npm run lint-fix",
     "ng": "ng",
     "start": "npm run build-ui-lib && ng serve",
     "build-ui-lib": "ng build ui",
@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "regen-rest": "sh ../documentation/api/scripts/regen-angular.sh ../documentation/api/templates-typescript-angular ../front-end/src/backend-connector/ ../documentation/api/rest-api.yaml"
+    "regen-rest": "sh ../documentation/api/scripts/regen-angular.sh ../documentation/api/templates-typescript-angular ../front-end/src/backend-connector/ ../documentation/api/rest-api.yaml",
+    "lint-fix": "node_modules/.bin/tslint --project tsconfig.json --config tslint.json --fix ./src/backend-connector/**/*.ts --format verbose"
   },
   "private": true,
   "dependencies": {
