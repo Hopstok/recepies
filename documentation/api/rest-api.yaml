@@ -27,30 +27,496 @@ consumes:
 ###############################################################################
 definitions:
   User:
+    allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          surname:
+            type: string
+          username:
+            type: string
+          email:
+            type: string
+          password:
+            type: string
+        required:
+          - id
+          - name
+          - surname
+          - email
+          - username
+      - $ref: '#/definitions/Dates'
+
+  UserPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+
+  Recipe:
+    allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          people:
+            type: integer
+          name:
+            type: string
+          ingredients:
+            type: array
+            items:
+              $ref: '#/definitions/Ingredient'
+          procedures:
+            type: array
+            items:
+              $ref: '#/definitions/Procedure'
+        required:
+          - id
+          - people
+          - name
+          - ingredients
+          - procedures
+      - $ref: '#/definitions/Dates'
+
+  RecipePage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/definitions/Recipe'
+        required:
+          - items
+
+  RecipeIngredient:
+    allOf:
+      - type: object
+        properties:
+          quantity:
+            type: integer
+        required:
+          - quantity
+      - $ref: '#/definitions/Ingredient'
+      - $ref: '#/definitions/Dates'
+
+  Ingredient:
+    allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          name:
+            type: string
+        required:
+          - id
+          - name
+      - $ref: '#/definitions/Dates'
+
+  IngredientPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/definitions/Ingredient'
+        required:
+          - items
+
+  Procedure:
+    allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          step:
+            type: string
+        required:
+          - id
+          - step
+      - $ref: '#/definitions/Dates'
+
+  ProcedurePage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/definitions/Procedure'
+        required:
+          - items
+
+  Dates:
     type: object
     properties:
-      id:
-        type: integer
-      name:
+      createdAt:
         type: string
-      surname:
+        format: date-time
+        readOnly: true
+      updatedAt:
         type: string
-      email:
-        type: string
-      password:
-        type: string
-      recoveryPasswordToken:
-        type: string
-      isAdmin:
-        type: boolean
+        format: date-time
+        readOnly: true
     required:
-      - id
-      - name
-      - surname
-      - email
-      - isAdmin
+        - createdAt
+        - updatedAt
+
+  Page:
+    type: object
+    properties:
+      page:
+        type: integer
+      limit:
+        type: integer
+      total:
+        type: integer
+    required:
+      - page
+      - limit
+      - total
+
+  # FIXME: Improve reflection our internal structure
+  InnerError:
+    properties:
+      title:
+        type: string
+      detail:
+        type: string
+      previous:
+        $ref: '#/definitions/InnerError'
+      error:
+        type: string
+        required:
+          - code
+    required:
+      - title
+      - detail
+
+  ErrorModel:
+    allOf:
+      - $ref: '#/definitions/InnerError'
+      - type: object
+        properties:
+          status:
+            type: integer
+          type:
+            type: string
+        required:
+          - status
+          - type
+
+###############################################################################
+# Generic Parameters
+###############################################################################
+parameters:
+  page:
+    name: page
+    in: query
+    description: The page of the collection to return
+    required: false
+    type: integer
+    default: 1
+  limit:
+    name: limit
+    in: query
+    description: How many items to return in one page
+    required: false
+    type: integer
+    default: 100
+  userId:
+    name: userId
+    in: path
+    description: The user id
+    required: true
+    type: integer
+  recipeId:
+    name: recipeId
+    in: path
+    description: The recipe id
+    required: true
+    type: integer
+  ingredientId:
+    name: ingredientId
+    in: path
+    description: The ingredient id
+    required: true
+    type: integer
+  procedureId:
+      name: procedureId
+      in: path
+      description: The procedure id
+      required: true
+      type: integer
+
+###############################################################################
+# API Responses
+###############################################################################
+responses:
+  default:
+    description: Unexpected error
+    schema:
+      $ref: '#/definitions/ErrorModel'
+  400:
+    description: Bad request
+    schema:
+      $ref: '#/definitions/ErrorModel'
+  401:
+    description: Unauthorized
+    schema:
+      $ref: '#/definitions/ErrorModel'
+  403:
+    description: Forbidden
+    schema:
+      $ref: '#/definitions/ErrorModel'
+  404:
+    description: Not found
+    schema:
+      $ref: '#/definitions/ErrorModel'
+  409:
+    description: Conflict
+    schema:
+      $ref: '#/definitions/ErrorModel'
 
 ###############################################################################
 # Routes
 ###############################################################################
 paths:
+  /users:
+    get:
+      tags:
+        - user
+      summary: Retrieve the list of users
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/limit'
+      responses:
+        200:
+          description: The list of users
+          schema:
+            $ref: '#/definitions/UserPage'
+    post:
+      tags:
+        - user
+      summary: Create a new user
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        200:
+          description: The new user created
+          schema:
+            $ref: '#/definitions/User'
+
+  /users/{userId}:
+    put:
+      tags:
+        - user
+      summary: Modify an user
+      parameters:
+        - $ref: '#/parameters/userId'
+        - name: user
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        200:
+          description: The user modfied
+          schema:
+            $ref: '#/definitions/User'
+    delete:
+      tags:
+        - user
+      summary: Delete an user
+      parameters:
+        - $ref: '#/parameters/userId'
+      responses:
+        200:
+          description: User deleted
+
+  /recipes:
+    get:
+      tags:
+        - recipe
+      summary: The list of recipes
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/limit'
+      responses:
+        200:
+          description: The list of recipes
+          schema:
+            $ref: '#/definitions/RecipePage'
+    post:
+      tags:
+        - recipe
+      summary: Create a new recipe
+      parameters:
+        - name: recipe
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Recipe'
+      responses:
+        200:
+          description: The new recipe created
+          schema:
+            $ref: '#/definitions/Recipe'
+
+  /recipes/{recipeId}:
+    put:
+      tags:
+        - recipe
+      parameters:
+        - $ref: '#/parameters/recipeId'
+        - name: recipe
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Recipe'
+      summary: Modify a recipe
+      responses:
+        200:
+          description: The recipe modified
+          schema:
+            $ref: '#/definitions/Recipe'
+    delete:
+      tags:
+        - recipe
+      parameters:
+        - $ref: '#/parameters/recipeId'
+      summary: Delete a recipe
+      responses:
+        200:
+          description: Recipe deleted
+
+  /ingredients:
+    get:
+      tags:
+        - ingredient
+      summary: The list of ingredients
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/limit'
+      responses:
+        200:
+          description: The list of ingredients
+          schema:
+            $ref: '#/definitions/IngredientPage'
+    post:
+      tags:
+        - ingredient
+      summary: Create a new ingredient
+      parameters:
+        - name: ingredient
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Ingredient'
+      responses:
+        200:
+          description: The new ingredient created
+          schema:
+            $ref: '#/definitions/Ingredient'
+
+  /ingredients/{ingredientId}:
+    put:
+      tags:
+        - ingredient
+      summary: Modify an ingredient
+      parameters:
+        - $ref: '#/parameters/ingredientId'
+        - name: ingredient
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Ingredient'
+      responses:
+        200:
+          description: The ingredient modified
+          schema:
+            $ref: '#/definitions/Ingredient'
+    delete:
+      tags:
+        - ingredient
+      parameters:
+        - $ref: '#/parameters/ingredientId'
+      summary: Delete an ingredient
+      responses:
+        200:
+          description: Ingredient deleted
+
+  /procedures:
+    get:
+      tags:
+        - procedure
+      summary: The list of procedures
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/limit'
+      responses:
+        200:
+          description: The list of procedures
+          schema:
+            $ref: '#/definitions/ProcedurePage'
+    post:
+      tags:
+        - procedure
+      summary: Create a new procedure
+      parameters:
+        - name: procedure
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Procedure'
+      responses:
+        200:
+          description: The procedure created
+          schema:
+            $ref: '#/definitions/Procedure'
+
+  /procedure/{procedureId}:
+    put:
+      tags:
+        - procedure
+      summary: Modify a procedure
+      parameters:
+        - $ref: '#/parameters/procedureId'
+        - name: procedure
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Procedure'
+      responses:
+        200:
+          description: The procedure modified
+          schema:
+            $ref: '#/definitions/Procedure'
+    delete:
+      tags:
+        - procedure
+      summary: Delete a procedure
+      parameters:
+        - $ref: '#/parameters/procedureId'
+      responses:
+        200:
+          description: Procedure deleted
