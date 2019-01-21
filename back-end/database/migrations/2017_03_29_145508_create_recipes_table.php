@@ -22,7 +22,7 @@ class CreateRecipesTable extends Migration
             $table->collation   = 'utf8_general_ci';
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('name',40);
+            $table->string('name', 40);
             $table->integer('people')->unsigned();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();

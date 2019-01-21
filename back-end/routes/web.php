@@ -46,3 +46,7 @@ Route::prefix('api/v1')->group(function () {
         Route::delete('/{id}', 'ProceduresController@delete');
     });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

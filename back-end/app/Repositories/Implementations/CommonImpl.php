@@ -30,11 +30,11 @@ class CommonImpl implements Common
     /**
      * Get the specified record.
      *
-     * @param $id
+     * @param int $id
      *
      * @return array
      */
-    public function getById ($id): array
+    public function getById (int $id): array
     {
         $record = [];
         $model = $this->model->find($id);
@@ -67,12 +67,12 @@ class CommonImpl implements Common
     /**
      * Method to update record.
      *
-     * @param $id
+     * @param int $id
      * @param array $attributes
      *
-     * @return Model
+     * @return bool
      */
-    public function update ($id, array $attributes): bool
+    public function update(int $id, array $attributes): bool
     {
         return (bool) $this->model->where('id', $id)
             ->update($attributes);
@@ -81,11 +81,11 @@ class CommonImpl implements Common
     /**
      * Method to delete record.
      *
-     * @param $id
+     * @param int $id
      *
      * @return bool
      */
-    public function delete ($id): bool
+    public function delete(int $id): bool
     {
        return (bool) $this->model->destroy($id);
     }

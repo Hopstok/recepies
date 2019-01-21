@@ -32,7 +32,7 @@ class RecipesController extends Controller
     /**
      * Get the specified Recipe from DB.
      *
-     * @param  int  $id
+     * @param int  $id
      * @return JsonResponse
      */
     public function show($id): JsonResponse
@@ -67,11 +67,11 @@ class RecipesController extends Controller
     /**
      * Method to delete a Recipe.
      *
-     * @param $id
+     * @param int $id
      *
      * @return JsonResponse
      */
-    public function delete($id)
+    public function delete(int $id): JsonResponse
     {
         $data = $this->recipeImp->delete($id);
         if ($data === true) {
@@ -86,12 +86,12 @@ class RecipesController extends Controller
     /**
      * Method to update Recipe data.
      *
-     * @param $id
+     * @param int $id
      * @param Request $request
      *
      * @return JsonResponse
      */
-    public function update($id, Request $request)
+    public function update(int $id, Request $request): JsonResponse
     {
         $params = $request->input();
         $data = $this->recipeImp->update($id, $params);

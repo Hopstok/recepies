@@ -22,11 +22,11 @@ interface Common
     /**
      * Get the specified record.
      *
-     * @param $id
+     * @param int $id
      *
-     * @return Collection
+     * @return array
      */
-     public function getById($id): array;
+     public function getById(int $id): array;
 
     /**
      * Create a new record.
@@ -40,20 +40,20 @@ interface Common
     /**
      * Update a specified record.
      *
-     * @param $id
+     * @param int $id
      * @param array $attributes
      *
-     * @return mixed
+     * @return bool
      */
-     public function update($id, array $attributes);
+     public function update(int $id, array $attributes): bool;
 
     /**
      * Delete a specified record.
      *
-     * @param $id
+     * @param int $id
      *
      * @return bool
      */
-     public function delete($id): bool;
+     public function delete(int $id): bool;
 }
 

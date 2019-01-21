@@ -34,7 +34,7 @@ class IngredientsController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         $data = $this->ingredientImp->getById($id);
 
@@ -70,7 +70,7 @@ class IngredientsController extends Controller
      *
      * @return JsonResponse
      */
-    public function delete($id)
+    public function delete(int $id)
     {
         $data = $this->ingredientImp->delete($id);
         if ($data === true) {

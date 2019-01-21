@@ -31,10 +31,11 @@ class ProceduresController extends Controller
     /**
      * Get the specified Procedure from DB.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         $data = $this->procedureImp->getById($id);
 
@@ -66,11 +67,11 @@ class ProceduresController extends Controller
     /**
      * Method to delete a Procedure.
      *
-     * @param $id
+     * @param int $id
      *
      * @return JsonResponse
      */
-    public function delete($id)
+    public function delete(int $id): JsonResponse
     {
         $data = $this->procedureImp->delete($id);
         if ($data === true) {
@@ -85,12 +86,12 @@ class ProceduresController extends Controller
     /**
      * Method to update Procedure data.
      *
-     * @param $id
+     * @param int $id
      * @param Request $request
      *
      * @return JsonResponse
      */
-    public function update($id, Request $request)
+    public function update(int $id, Request $request): JsonResponse
     {
         $params = $request->input();
         $data = $this->procedureImp->update($id, $params);
