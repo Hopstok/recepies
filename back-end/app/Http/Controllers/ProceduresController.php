@@ -2,70 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Recipes;
-use App\Repositories\Implementations\RecipeImpl;
+use App\Http\Requests\Procedures;
+use App\Repositories\Implementations\ProcedureImpl;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class RecipesController extends Controller
+class ProceduresController extends Controller
 {
-    /** @var RecipeImpl $recipeImp */
-    private $recipeImp;
+    private $procedureImp;
 
-    public function __construct(RecipeImpl $recipeImp)
+    public function __construct (ProcedureImpl $procedureImp)
     {
-        $this->recipeImp = $recipeImp;
+        $this->procedureImp = $procedureImp;
     }
 
     /**
-     * Get all Recipes from DB.
+     * Get all Procedures from DB.
      *
      * @return JsonResponse
      */
     public function index(): JsonResponse
     {
-        $data = $this->recipeImp->getAll();
+        $data = $this->procedureImp->getAll();
 
         return response()->json(['data' => $data], self::OK);
     }
 
     /**
-     * Get the specified Recipe from DB.
+     * Get the specified Procedure from DB.
      *
-     * @param int  $id
+     * @param int $id
+     *
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
-        $data = $this->recipeImp->getById($id);
+        $data = $this->procedureImp->getById($id);
 
         return response()->json(['data' => $data], self::OK);
     }
 
     /**
-     * Method to create a Recipe.
+     * Method to create a Procedure.
      *
-     * @param Recipes $request
+     * @param Procedures $request
      *
      * @return JsonResponse
      */
-    public function create(Recipes $request): JsonResponse
+    public function create(Procedures $request): JsonResponse
     {
         $params = $request->input();
 
-        $recipe =  $this->recipeImp->create($params);
+        $procedures = $this->procedureImp->create($params);
 
-        if (!empty($recipe)) {
-            $res =  response()->json(['data' => $recipe], self::OK);
+        if (!empty($procedures)) {
+            $res =  response()->json(['data' => $procedures], self::OK);
         } else {
-            $res = response()->json(['data' => $recipe], self::NOT_CREATED);
+            $res = response()->json(['data' => $procedures], self::NOT_CREATED);
         }
 
         return $res;
     }
 
     /**
-     * Method to delete a Recipe.
+     * Method to delete a Procedure.
      *
      * @param int $id
      *
@@ -73,7 +73,7 @@ class RecipesController extends Controller
      */
     public function delete(int $id): JsonResponse
     {
-        $data = $this->recipeImp->delete($id);
+        $data = $this->procedureImp->delete($id);
         if ($data === true) {
             $response = response()->json(['data' => $data], self::OK);
         } else {
@@ -84,7 +84,7 @@ class RecipesController extends Controller
     }
 
     /**
-     * Method to update Recipe data.
+     * Method to update Procedure data.
      *
      * @param int $id
      * @param Request $request
@@ -94,7 +94,7 @@ class RecipesController extends Controller
     public function update(int $id, Request $request): JsonResponse
     {
         $params = $request->input();
-        $data = $this->recipeImp->update($id, $params);
+        $data = $this->procedureImp->update($id, $params);
         if ($data === true) {
             $response = response()->json(['data' => $data], self::OK);
         } else {
