@@ -25,7 +25,7 @@ class Common implements CommonInt
      */
     public function getAll(): Collection
     {
-        return $this->model::all();
+        return $this->model::paginate(15);
     }
 
     /**
