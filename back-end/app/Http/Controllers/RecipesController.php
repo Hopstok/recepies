@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Recipes;
-use App\Repositories\Implementations\RecipeImpl;
+use App\Http\Requests\Recipe as RecipeReq;
+use App\Repositories\Implementations\Recipe as RecipeImp;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RecipesController extends Controller
 {
-    /** @var RecipeImpl $recipeImp */
+    /** @var RecipeImp $recipeImp */
     private $recipeImp;
 
-    public function __construct(RecipeImpl $recipeImp)
+    public function __construct(RecipeImp $recipeImp)
     {
         $this->recipeImp = $recipeImp;
     }
 
     /**
-     * Get all Recipes from DB.
+     * Get all Recipe from DB.
      *
      * @return JsonResponse
      */
@@ -45,11 +45,11 @@ class RecipesController extends Controller
     /**
      * Method to create a Recipe.
      *
-     * @param Recipes $request
+     * @param RecipeReq $request
      *
      * @return JsonResponse
      */
-    public function create(Recipes $request): JsonResponse
+    public function create(RecipeReq $request): JsonResponse
     {
         $params = $request->input();
 

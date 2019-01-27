@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Procedures;
-use App\Repositories\Implementations\ProcedureImpl;
+use App\Http\Requests\Procedure as ProcedureReq;
+use App\Repositories\Implementations\Procedure as ProcedureImp;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProceduresController extends Controller
 {
+    /** @var ProcedureImp $procedureImp */
     private $procedureImp;
 
-    public function __construct (ProcedureImpl $procedureImp)
+    public function __construct (ProcedureImp $procedureImp)
     {
         $this->procedureImp = $procedureImp;
     }
 
     /**
-     * Get all Procedures from DB.
+     * Get all Procedure from DB.
      *
      * @return JsonResponse
      */
@@ -45,11 +46,11 @@ class ProceduresController extends Controller
     /**
      * Method to create a Procedure.
      *
-     * @param Procedures $request
+     * @param ProcedureReq $request
      *
      * @return JsonResponse
      */
-    public function create(Procedures $request): JsonResponse
+    public function create(ProcedureReq $request): JsonResponse
     {
         $params = $request->input();
 

@@ -3,11 +3,11 @@
 namespace App\Repositories\Interfaces;
 
 /**
- * Interface IngredientInt.
+ * Interface Ingredient.
  *
  * interface to extend common methods.
  */
-interface IngredientInt extends Common
+interface Ingredient extends Common
 {
 
 }

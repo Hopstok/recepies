@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Ingredients;
-use App\Repositories\Implementations\IngredientImpl;
+use App\Http\Requests\Ingredient as IngredientReq;
+use App\Repositories\Implementations\Ingredient as IngredientImp;
 use Illuminate\Http\JsonResponse;
 
 class IngredientsController extends Controller
 {
-    /** @var IngredientImpl $ingredientImp */
+    /** @var IngredientImp $ingredientImp */
     private $ingredientImp;
 
-    public function __construct(IngredientImpl $ingredientImp)
+    public function __construct(IngredientImp $ingredientImp)
     {
         $this->ingredientImp = $ingredientImp;
     }
 
     /**
-     * Get all Ingredients from DB.
+     * Get all Ingredient from DB.
      *
      * @return JsonResponse
      */
@@ -29,7 +29,7 @@ class IngredientsController extends Controller
     }
 
     /**
-     * Get the specified Ingredients from DB.
+     * Get the specified Ingredient from DB.
      *
      * @param  int  $id
      * @return JsonResponse
@@ -44,11 +44,11 @@ class IngredientsController extends Controller
     /**
      * Method to create an Ingredient.
      *
-     * @param Ingredients $request
+     * @param IngredientReq $request
      *
      * @return JsonResponse
      */
-    public function create(Ingredients $request): JsonResponse
+    public function create(IngredientReq $request): JsonResponse
     {
         $name = $request->input('name');
 

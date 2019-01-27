@@ -2,14 +2,15 @@
 
 namespace App\Repositories\Implementations;
 
-use App\Repositories\Interfaces\Common;
+use App\Repositories\Interfaces\Common as CommonInt;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
-class CommonImpl implements Common
+class Common implements CommonInt
 {
+    /** @var Model $model */
     private $model;
 
     public function __construct(Model $model)

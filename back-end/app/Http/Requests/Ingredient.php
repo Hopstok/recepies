@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Procedures extends FormRequest
+class Ingredient extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class Procedures extends FormRequest
     public function rules()
     {
         return [
-          'recipe_id' => 'required|int',
-          'step' => 'required|string',
+            'name' => 'required|string',
         ];
     }
 }

@@ -2,21 +2,21 @@
 
 namespace App\Repositories\Implementations;
 
-use App\Models\Procedure;
-use App\Repositories\Interfaces\ProcedureInt;
+use App\Models\Procedure as ProcedureModel;
+use App\Repositories\Interfaces\Procedure as ProcedureInt;
 
 /**
- * Class ProcedureImpl
+ * Class Procedure
  *
  * The class specialize the common class method. For implement new feature
  * add the firm inside the procedure interface and implement here the method.
  */
-class ProcedureImpl extends CommonImpl implements ProcedureInt
+class Procedure extends Common implements ProcedureInt
 {
-    /** @var Procedure $procedure */
+    /** @var ProcedureModel $procedure */
     private $procedure;
 
-    public function __construct (Procedure $procedure)
+    public function __construct (ProcedureModel $procedure)
     {
         parent::__construct($procedure);
 

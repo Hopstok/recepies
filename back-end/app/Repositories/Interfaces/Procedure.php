@@ -3,11 +3,11 @@
 namespace App\Repositories\Interfaces;
 
 /**
- * Interface RecipeInt.
+ * Interface Procedure.
  *
  * interface to extend common methods.
  */
-interface RecipeInt extends Common
+interface Procedure extends Common
 {
 
 }

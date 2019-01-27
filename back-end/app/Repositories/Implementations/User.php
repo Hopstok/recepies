@@ -5,7 +5,7 @@ namespace App\Repositories\Implementations;
 use App\Models\User;
 use App\Repositories\Interfaces\UserInt;
 
-class UserImpl extends CommonImpl implements UserInt
+class User extends Common implements UserInt
 {
     /** @var User $user */
     private $user;

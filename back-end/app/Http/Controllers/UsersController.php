@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Users;
 use App\Mail\Recover;
 use App\Mail\Welcome;
-use App\Repositories\Implementations\UserImpl;
+use App\Repositories\Implementations\User;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class UsersController extends Controller
     private $user;
     private $email;
 
-    public function __construct(User $user, Mailer $email, UserImpl $userImp)
+    public function __construct(User $user, Mailer $email, User $userImp)
     {
         $this->user = $user;
         $this->email = $email;

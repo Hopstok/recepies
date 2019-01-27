@@ -2,21 +2,21 @@
 
 namespace App\Repositories\Implementations;
 
-use App\Models\Ingredient;
-use App\Repositories\Interfaces\IngredientInt;
+use App\Models\Ingredient as IngredientModel;
+use App\Repositories\Interfaces\Ingredient as IngredientInt;
 
 /**
- * Class IngredientImpl.
+ * Class Ingredient.
  *
  * The class specialize the common class method. For implement new feature
  * add the firm inside the ingredient interface and implement here the method.
  */
-class IngredientImpl extends CommonImpl implements IngredientInt
+class Ingredient extends Common implements IngredientInt
 {
-    /** @var Ingredient $ingredient */
+    /** @var IngredientModel $ingredient */
     private $ingredient;
 
-    public function __construct(Ingredient $ingredient)
+    public function __construct(IngredientModel $ingredient)
     {
         parent::__construct($ingredient);
 
