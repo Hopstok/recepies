@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -10,4 +10,25 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * Represent 200 status ok.
+     *
+     * @var int
+     */
+    const OK = 200;
+
+    /**
+     * Represent 404 status resource not found.
+     *
+     * @var int
+     */
+    const NOT_FOUND = 404;
+
+    /**
+     * Represent 400 status.
+     *
+     * @var int
+     */
+    const NOT_CREATED = 400;
 }
