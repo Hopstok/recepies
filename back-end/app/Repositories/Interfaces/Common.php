@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+use InvalidArgumentException;
 
 /**
  * Interface Common
@@ -13,11 +15,11 @@ use Illuminate\Database\Eloquent\Collection;
 interface Common
 {
     /**
-     * Get all records.
+     * @param $perPage
      *
-     * @return Collection
+     * @return LengthAwarePaginator
      */
-    public function getAll(): Collection;
+    public function getAll($perPage): LengthAwarePaginator;
 
     /**
      * Get the specified record.
@@ -33,9 +35,9 @@ interface Common
      *
      * @param array $attributes
      *
-     * @return mixed
+     * @return Model
      */
-    public function create(array $attributes);
+    public function create(array $attributes): Model;
 
     /**
      * Update a specified record.
@@ -43,9 +45,9 @@ interface Common
      * @param int $id
      * @param array $attributes
      *
-     * @return bool
+     * @return Model
      */
-    public function update(int $id, array $attributes): bool;
+    public function update(int $id, array $attributes): Model;
 
     /**
      * Delete a specified record.
@@ -55,5 +57,12 @@ interface Common
      * @return bool
      */
     public function delete(int $id): bool;
+
+    /**
+     * @param $perPage
+     *
+     * @throws InvalidArgumentException
+     */
+    public function validateLimit($perPage);
 }
 

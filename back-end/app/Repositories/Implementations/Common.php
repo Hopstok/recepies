@@ -6,7 +6,9 @@ use App\Repositories\Interfaces\Common as CommonInt;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
+use InvalidArgumentException;
 
 class Common implements CommonInt
 {
@@ -19,13 +21,29 @@ class Common implements CommonInt
     }
 
     /**
-     * Get all record from DB.
+     * Return items paginated.
      *
-     * @return Collection
+     * @param int $perPage
+     *
+     * @return LengthAwarePaginator
      */
-    public function getAll(): Collection
+    public function getAll($perPage = 1) : LengthAwarePaginator
     {
-        return $this->model::paginate(15);
+        $this->validateLimit($perPage);
+
+        return $this->model::paginate($perPage);
+    }
+
+    /**
+     * Method to validate limit param.
+     *
+     * @param $perPage
+     */
+    public function validateLimit ($perPage)
+    {
+        if (is_numeric($perPage) === false && $perPage !== null) {
+            throw new InvalidArgumentException('The limit param is not valid');
+        }
     }
 
     /**
