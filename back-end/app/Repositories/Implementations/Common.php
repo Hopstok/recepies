@@ -2,15 +2,12 @@
 
 namespace App\Repositories\Implementations;
 
-use App\Repositories\Interfaces\Common as CommonInt;
-use Exception;
-use Illuminate\Database\Eloquent\Collection;
+use App\Repositories\Interfaces\Common as ICommon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 
-class Common implements CommonInt
+class Common implements ICommon
 {
     /** @var Model $model */
     private $model;
@@ -55,32 +52,17 @@ class Common implements CommonInt
      */
     public function getById (int $id): array
     {
-        $record = [];
-        $model = $this->model->find($id);
-        if ($model !== null) {
-            $record = $model->getAttributes();
-            unset($record['created_at'], $record['updated_at']);
-        }
-
-        return $record;
+        return $this->model->findOrFail($id);
     }
 
     /**
      * @param array $attributes
      *
-     * @return mixed
+     * @return Model
      */
-    public function create(array $attributes)
+    public function create(array $attributes): Model
     {
-        $model = [];
-
-        try {
-            $model = $this->model::create($attributes);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        return $model;
+        return $this->model::create($attributes);
     }
 
     /**
@@ -89,12 +71,14 @@ class Common implements CommonInt
      * @param int $id
      * @param array $attributes
      *
-     * @return bool
+     * @return Model
      */
-    public function update(int $id, array $attributes): bool
+    public function update(int $id, array $attributes): Model
     {
-        return (bool) $this->model->where('id', $id)
-                                  ->update($attributes);
+        $this->model->where('id', $id)
+                    ->update($attributes);
+
+        return $this->model;
     }
 
     /**
