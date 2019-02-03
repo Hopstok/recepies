@@ -6,6 +6,7 @@ import { UiModule } from '../../projects/ui/src/lib/ui.module';
 
 import { AppRoutingModule } from '@rock-recipe/app-routing.module';
 import { AppComponent } from '@rock-recipe/app.component';
+import { PagesModule } from '@rock-recipe/pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AppComponent } from '@rock-recipe/app.component';
   imports: [
     BrowserModule,
     UiModule,
+    PagesModule,
     AppRoutingModule,
   ],
   providers: [],
