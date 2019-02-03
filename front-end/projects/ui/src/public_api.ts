@@ -2,6 +2,7 @@
  * Public API Surface of ui
  */
 
+export * from './lib/container/container.component';
 export * from './lib/form/form.component';
 export * from './lib/input/input.component';
 export * from './lib/select/select.component';

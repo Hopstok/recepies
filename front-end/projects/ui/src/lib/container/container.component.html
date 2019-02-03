@@ -1,0 +1,12 @@
+<clr-main-container>
+  <clr-header>
+    <ng-content select="[headerAfter]"></ng-content>
+    <div
+      class="header-nav"
+      [clr-nav-level]="headerNavLevel">
+      <ng-content select="[headerContent]"></ng-content>
+    </div>
+    <ng-content select="[headerBefore]"></ng-content>
+  </clr-header>
+  <ng-content></ng-content>
+</clr-main-container>
