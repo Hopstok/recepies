@@ -9,6 +9,7 @@ import {
 
 import { ContainerComponent } from './container/container.component';
 import { FormComponent } from './form/form.component';
+import { HeaderComponent } from './header/header.component';
 import { InputComponent } from './input/input.component';
 import { SelectComponent } from './select/select.component';
 import { UiComponent } from './ui.component';
@@ -16,6 +17,7 @@ import { UiComponent } from './ui.component';
 const COMPONENTS = [
   ContainerComponent,
   FormComponent,
+  HeaderComponent,
   InputComponent,
   SelectComponent,
 ];

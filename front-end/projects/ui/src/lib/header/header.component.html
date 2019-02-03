@@ -1,0 +1,9 @@
+<clr-header>
+  <ng-content select="[after]"></ng-content>
+  <div
+    class="header-nav"
+    [clr-nav-level]="level">
+    <ng-content></ng-content>
+  </div>
+  <ng-content select="[before]"></ng-content>
+</clr-header>
