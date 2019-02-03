@@ -12,6 +12,7 @@ import { FormComponent } from './form/form.component';
 import { HeaderComponent } from './header/header.component';
 import { InputComponent } from './input/input.component';
 import { SelectComponent } from './select/select.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { UiComponent } from './ui.component';
 
 const COMPONENTS = [
@@ -20,6 +21,7 @@ const COMPONENTS = [
   HeaderComponent,
   InputComponent,
   SelectComponent,
+  SidenavComponent,
 ];
 
 @NgModule({
