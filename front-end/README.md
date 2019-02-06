@@ -1,4 +1,4 @@
-# FrontEnd
+# Front End
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
@@ -22,6 +22,15 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## UI
+
+UI library is generated as an internal project, separated from the main one.
+
+This is done using Angular CLI command `ng generate library ui`.
+
+In order to generate a new stuff inside the project you have to run `ng generate component foo --project=ui`.
+
+### References
+
+- https://blog.angulartraining.com/create-your-own-libraries-with-angular-cli-7b434600bbb7
