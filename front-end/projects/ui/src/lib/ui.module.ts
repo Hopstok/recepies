@@ -8,6 +8,7 @@ import {
 } from '@clr/angular';
 
 import { ContainerComponent } from './container/container.component';
+import { ContentComponent } from './content/content.component';
 import { FormComponent } from './form/form.component';
 import { HeaderComponent } from './header/header.component';
 import { InputComponent } from './input/input.component';
@@ -17,6 +18,7 @@ import { UiComponent } from './ui.component';
 
 const COMPONENTS = [
   ContainerComponent,
+  ContentComponent,
   FormComponent,
   HeaderComponent,
   InputComponent,
