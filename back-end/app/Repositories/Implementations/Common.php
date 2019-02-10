@@ -20,11 +20,11 @@ class Common implements ICommon
     /**
      * Return items paginated.
      *
-     * @param int $perPage
+     * @param string $perPage
      *
      * @return LengthAwarePaginator
      */
-    public function getAll($perPage = 1) : LengthAwarePaginator
+    public function getAll(string $perPage = '1'): LengthAwarePaginator
     {
         $this->validateLimit($perPage);
 
@@ -34,9 +34,9 @@ class Common implements ICommon
     /**
      * Method to validate limit param.
      *
-     * @param $perPage
+     * @param string $perPage
      */
-    public function validateLimit ($perPage)
+    public function validateLimit(string $perPage)
     {
         if (is_numeric($perPage) === false && $perPage !== null) {
             throw new InvalidArgumentException('The limit param is not valid');
@@ -50,7 +50,7 @@ class Common implements ICommon
      *
      * @return array
      */
-    public function getById (int $id): array
+    public function getById(int $id): array
     {
         return $this->model->findOrFail($id);
     }
