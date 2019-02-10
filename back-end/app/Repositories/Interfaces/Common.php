@@ -15,11 +15,13 @@ use InvalidArgumentException;
 interface Common
 {
     /**
-     * @param $perPage
+     * Get all data records.
+     *
+     * @param string $perPage
      *
      * @return LengthAwarePaginator
      */
-    public function getAll($perPage): LengthAwarePaginator;
+    public function getAll(string $perPage): LengthAwarePaginator;
 
     /**
      * Get the specified record.
@@ -59,10 +61,11 @@ interface Common
     public function delete(int $id): bool;
 
     /**
-     * @param $perPage
+     * Validate
+     * @param string $perPage
      *
      * @throws InvalidArgumentException
      */
-    public function validateLimit($perPage);
+    public function validateLimit(string $perPage);
 }
 
