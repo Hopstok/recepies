@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { UiFormControl } from '../ui-form-control';
 
 @Component({
@@ -7,6 +8,8 @@ import { UiFormControl } from '../ui-form-control';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent extends UiFormControl implements OnInit {
+
+  @Input() type = 'text';
 
   ngOnInit() {
   }
