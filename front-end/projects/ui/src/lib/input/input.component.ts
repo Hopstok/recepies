@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { UiFormControl } from '../ui-form-control';
 
@@ -6,6 +6,7 @@ import { UiFormControl } from '../ui-form-control';
   selector: 'ui-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class InputComponent extends UiFormControl implements OnInit {
 
