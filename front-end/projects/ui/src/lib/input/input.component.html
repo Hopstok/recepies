@@ -1,7 +1,9 @@
-<clr-input-container>
+<clr-input-container class="ui-input">
   <label *ngIf="label">{{ label }}</label>
   <input
     clrInput
+    [type]="type"
+    [name]="name"
     [formControl]="formControl"
     [placeholder]="placeholder" />
 </clr-input-container>
