@@ -6,6 +6,7 @@ export * from './lib/content/content.component';
 export * from './lib/form/form.component';
 export * from './lib/header/header.component';
 export * from './lib/input/input.component';
+export * from './lib/input-password/input-password.component';
 export * from './lib/select/select.component';
 export * from './lib/sidenav/sidenav.component';
 export * from './lib/ui.component';

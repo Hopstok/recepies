@@ -11,6 +11,7 @@ import { ContainerComponent } from './container/container.component';
 import { ContentComponent } from './content/content.component';
 import { FormComponent } from './form/form.component';
 import { HeaderComponent } from './header/header.component';
+import { InputPasswordComponent } from './input-password/input-password.component';
 import { InputComponent } from './input/input.component';
 import { SelectComponent } from './select/select.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -22,6 +23,7 @@ const COMPONENTS = [
   FormComponent,
   HeaderComponent,
   InputComponent,
+  InputPasswordComponent,
   SelectComponent,
   SidenavComponent,
 ];
